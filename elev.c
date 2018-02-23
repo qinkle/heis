@@ -83,6 +83,7 @@ int elev_get_stop_signal(void) {
     return io_read_bit(STOP);
 }
 
+
 void elev_set_stop_lamp(int value) {
     if (value)
         io_set_bit(LIGHT_STOP);
