@@ -4,8 +4,6 @@
 
 int main() {
     // Initialize hardware
-	
-	
     if (!elev_init()) {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
@@ -18,10 +16,11 @@ int main() {
 	fsm_floor_sensor();
 	
 	
-	
+	//Initialize state machine and queue
+	fsm_init();
+	queue_init();
 	
     while (1) {
-		
 		if (elev_get_stop_signal() != stop){
 			fsm_stop_signal(); //Implementer!
 		}
