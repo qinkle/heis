@@ -28,7 +28,7 @@ int main() {
 			fsm_floor_sensor(); //Implementer!
 		}
 		if (elev_order_button_pressed() /*Implementer! */){
-			queue_take_order(); //Implementer!
+			fsm_button_pressed(); //Implementer!
 		}
 	
     }
