@@ -118,6 +118,8 @@ int elev_get_button_signal(elev_button_type_t button, int floor);
 */
 void elev_set_button_lamp(elev_button_type_t button, int floor, int value);
 
+//Returns 1 if any button is pressed
+int elev_any_button_pressed();
 
 
 #endif // #ifndef __INCLUDE_DRIVER_H__

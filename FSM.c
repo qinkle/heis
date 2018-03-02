@@ -86,7 +86,7 @@ void fsm_button_pressed() {
             break;
             
         default:
-             // What to do here?
+            queue_any_button_pressed();
             break;
     }
 }
