@@ -60,7 +60,6 @@ void queue_any_button_pressed(){
 			}
 		}
 	}
-
 }
 
 // Returns 1 if the queue is empty, 0 if not
@@ -75,7 +74,6 @@ int queue_is_empty(){
 	}
 
 	return 1;
-
 }
 
 
@@ -189,10 +187,10 @@ void queue_start_motor(){
 	// If none of the statements above apply, the elevator moves in the same direction it was going in
 	elev_set_motor_direction(direction);
 	return;
-
-
 }
 
+// Checks if there are any orders beyond the current position in the direction the elevator is moving
+// Returns 1 if there are none and 0 if there are.
 int queue_is_last_stop(){
 
 	int current_floor = elev_get_floor_sensor_signal();
