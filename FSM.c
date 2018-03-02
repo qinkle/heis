@@ -1,5 +1,6 @@
 #include "elev.h"
 #include "queue.h"
+#include "timer.h"
 
 enum FSM_STATE {
     ELEVATOR_MOVES,
