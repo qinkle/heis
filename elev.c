@@ -145,3 +145,21 @@ void elev_set_button_lamp(elev_button_type_t button, int floor, int value) {
     else
         io_clear_bit(lamp_channel_matrix[floor][button]);
 }
+
+int elev_any_button_pressed() {
+    
+    unsigned int sum = 0;
+    
+    for (int floor = 0; floor < N_FLOORS; floor++) {
+        
+        for (int button = 0; button < N_BUTTONS; button++) {
+            sum += button_channel_matrix[floor][button];
+        }
+    }
+    
+    return sum;
+}
+
+int elev_stop_button_released() {
+    
+}

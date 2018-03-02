@@ -21,32 +21,32 @@ int main() {
 	queue_init();
 	
     while (1) {
-		if (elev_get_stop_signal() != stop){
-			fsm_stop_signal(); //Implementer!
+		if (elev_get_stop_signal()) {
+			fsm_stop_signal();
 		}
         
-		if (elev_get_floor_sensor_signal()){
-			fsm_floor_sensor(); //Implementer!
+		if (elev_get_floor_sensor_signal()) {
+			fsm_floor_sensor();
 		}
         
-		if (elev_order_button_pressed() /*Implementer! */){
-			fsm_button_pressed(); //Implementer!
+		if (elev_any_button_pressed()) {
+			fsm_button_pressed();
 		}
         
         if (timer_is_out()){ //Implementer!
-            fsm_timer_is_out(); //Implementer!
+            fsm_timer_is_out();
         }
         
-        if (elev_stop_button_released()){ //Implementer!
-            fsm_stop_button_released(); //Implementer!
+        if (!elev_get_stop_signal()){ //Er dette lov?
+            fsm_stop_button_released();
         }
         
         if (!queue_is_empty()){
-            fsm_queue_not_empty(); //Implementer!
+            fsm_queue_not_empty();
         }
         
         if (qeue_stop_here()) {
-            fsm_floor_is_ordered(); //Implementer!
+            fsm_floor_is_ordered();
         }
         
         
