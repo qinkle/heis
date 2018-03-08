@@ -1,6 +1,9 @@
+#include "queue.h"
 #include "elev.h"
 #include "FSM.h"
 #include "timer.h"
+#include "io.h"
+#include "channels.h"
 #include <stdio.h>
 
 
@@ -13,18 +16,18 @@ int main() {
 	
 	//Go to defined state without heeding buttons
     elev_set_motor_direction(DIRN_UP);
-	while (elev_get_floor_sensor_signal == -1){}
+	while (elev_get_floor_sensor_signal() == -1){}
 	elev_set_motor_direction(DIRN_STOP);
 	fsm_floor_sensor();
 	
 	
 	//Initialize state machine and queue
-	fsm_init();
-	queue_init();
-	
+	//fsm_init();
+	//queue_init();
+    
     while (1) {
 		if (elev_get_stop_signal()) {
-			fsm_stop_signal();
+			fsm_stop_button_pressed();
 		}
         
 		if (elev_get_floor_sensor_signal()) {
@@ -35,11 +38,11 @@ int main() {
 			fsm_button_pressed();
 		}
         
-        if (timer_is_out()){ //Implementer!
+        if (timer_is_out()){
             fsm_timer_is_out();
         }
         
-        if (!elev_get_stop_signal()){ //Er dette lov?
+        if (!elev_get_stop_signal()){
             fsm_stop_button_released();
         }
         
@@ -47,16 +50,10 @@ int main() {
             fsm_queue_not_empty();
         }
         
-        if (qeue_stop_here()) {
+        if (queue_stop_here()) {
             fsm_floor_is_ordered();
         }
         
-        
-        
-        
-        
-        }
-	
     }
 
     return 0;

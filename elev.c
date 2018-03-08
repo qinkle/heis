@@ -161,5 +161,5 @@ int elev_any_button_pressed() {
 }
 
 int elev_stop_button_released() {
-    
+    //Dette må implementeres
 }

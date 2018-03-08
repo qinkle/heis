@@ -1,5 +1,6 @@
-#include "stateMachine.h"
+#include "FSM.h"
 #include "elev.h"
+#include "timer.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -63,7 +64,7 @@ void queue_any_button_pressed(){
 }
 
 // Returns 1 if the queue is empty, 0 if not
-int queue_is_empty(){
+int queue_is_empty(void) {
 
 	for(int floor = 0; floor < N_FLOORS; floor++){
 		for(int button = 0; button < N_BUTTONS; button++) {
@@ -80,7 +81,7 @@ int queue_is_empty(){
 // Returns 1 if the elevator is supposed to stop at the current floor
 // and clears the order, returns 0 if it's not supposed to stop at the
 // floor
-int queue_stop_here(){
+int queue_stop_here(void) {
 
 	int stop_here = 0;
 	int current_floor = elev_get_floor_sensor_signal();

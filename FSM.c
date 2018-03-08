@@ -7,12 +7,11 @@ enum FSM_STATE {
     ELEVATOR_STOPPED,
     EMERGENCY_STOP,
     DOORS_OPEN
-};
+} STATE; // Holds curent state
 
 
-FSM_STATE STATE; //Init state variable
 
-void fsm_stop_signal(){
+void fsm_stop_button_pressed(){
     
     queue_clear();
     
@@ -23,7 +22,7 @@ void fsm_stop_signal(){
             break;
             
         case DOORS_OPEN:
-            elev_set_door_open_lamp(0);
+            elev_set_door_open_lamp(0); //Closes doors
             break;
             
         default:
@@ -46,7 +45,7 @@ void fsm_stop_button_released() {
             
             else if (elev_get_floor_sensor_signal()) {
                 elev_set_door_open_lamp(1);
-                timer_start_timer();
+                timer_start();
                 STATE = DOORS_OPEN;
             }
             
@@ -96,7 +95,6 @@ void fsm_timer_is_out() {
     switch (STATE) {
             
         case DOORS_OPEN:
-            timer_stop_timer();
             elev_set_door_open_lamp(0);
             STATE = ELEVATOR_STOPPED;
             break;
@@ -128,7 +126,7 @@ void fsm_floor_is_ordered() {
             
         case ELEVATOR_STOPPED:
             elev_set_door_open_lamp(0);
-            timer_start_timer();
+            timer_start();
             STATE = DOORS_OPEN;
             break;
             

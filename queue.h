@@ -10,7 +10,7 @@ void queue_init(void);
 /**
 	Clears all orders from the queues' order_matrix
 */
-void queue_clear(void);
+void queue_clear(void); //Burde denne hete "clear_all_orders"?
 
 /**
 	Places an order in the given floor and button type
@@ -32,18 +32,18 @@ int queue_is_empty(void);
 // Returns 1 if the elevator is supposed to stop at the current floor
 // and clears the order, returns 0 if it's not supposed to stop at the
 // floor
-int queue_stop_here();
+int queue_stop_here(void);
 
 // Stops the elevator.
-void queue_stop_motor();
+void queue_stop_motor(void);
 
 // Checks where the elevator is at the moment and decides where to move the elevator
 // It only changes the direction of the elevator if there are no new orders in the direction
 // the elevator is already moving to avoid people waiting for an elevator that never
 // arrives
-void queue_start_motor();
+void queue_start_motor(void);
 
 
 // Checks if there are any orders beyond the current position in the direction the elevator is moving
 // Returns 1 if there are none and 0 if there are.
-int queue_is_last_stop();
+int queue_is_last_stop(void);
