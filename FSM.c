@@ -9,19 +9,17 @@ enum FSM_STATE {
     DOORS_OPEN
 };
 
-FSM_STATE STATE;
+
+FSM_STATE STATE; //Init state variable
 
 void fsm_stop_signal(){
     
-    queue_clear(); //Kan denne ligger her?
+    queue_clear();
     
     switch (STATE) {
             
         case ELEVATOR_MOVES:
             queue_stop_motor();
-            break;
-            
-        case ELEVATOR_STOPPED:
             break;
             
         case DOORS_OPEN:
@@ -32,7 +30,7 @@ void fsm_stop_signal(){
             break;
     }
     
-    STATE = EMERGENCY_STOP; //Kan denne ligger her?
+    STATE = EMERGENCY_STOP;
     
 }
 
@@ -67,7 +65,7 @@ void fsm_floor_sensor() {
         case ELEVATOR_MOVES:
             
             if (queue_stop_here()) {
-                queue_stop_motor();;
+                queue_stop_motor();
                 STATE = ELEVATOR_STOPPED;
             }
             
@@ -83,10 +81,11 @@ void fsm_button_pressed() {
     switch (STATE) {
             
         case EMERGENCY_STOP:
-            // Ignorerer bestillinger i EMERG_STOP
+            //Ignore orders when in EMERGENCY_STOP state
             break;
             
         default:
+            //Tells queue module that an order has been made
             queue_any_button_pressed();
             break;
     }

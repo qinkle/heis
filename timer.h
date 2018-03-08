@@ -2,13 +2,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-enum TIMER_STATE {
-    OFF,
-    ON
-};
 
-void timer_start();
-void timer_stop();
+void timer_start(); // Starts timer
+int timer_is_out(); // Returns 1 if timer is out
 
 
 
