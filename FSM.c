@@ -9,7 +9,14 @@ enum FSM_STATE {
     DOORS_OPEN
 } STATE; // Holds curent state
 
-
+void fsm_init(void) {
+    if (elev_get_floor_sensor_signal()) {
+        STATE = ELEVATOR_STOPPED;
+    }
+    else {
+        STATE = ELEVATOR_MOVES
+    }
+}
 
 void fsm_stop_button_pressed(){
     

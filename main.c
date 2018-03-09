@@ -13,6 +13,8 @@ int main() {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
+    
+    fsm_init();
 	
 	//Go to defined state without heeding buttons
     elev_set_motor_direction(DIRN_UP);
@@ -22,7 +24,7 @@ int main() {
 	
 	
 	//Initialize state machine and queue
-	//fsm_init();
+
 	queue_init();
     
     while (1) {
