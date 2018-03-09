@@ -23,7 +23,7 @@ int main() {
 	
 	//Initialize state machine and queue
 	//fsm_init();
-	//queue_init();
+	queue_init();
     
     while (1) {
 		if (elev_get_stop_signal()) {

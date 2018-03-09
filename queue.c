@@ -1,5 +1,5 @@
 #include "FSM.h"
-#include "queue.c"
+#include "queue.h"
 #include "elev.h"
 #include "timer.h"
 #include <stdlib.h>
@@ -18,7 +18,7 @@
 	floors	third		0	0		1
 			fourth		0	0		0
 */
-static const int order_matrix[N_FLOORS][N_BUTTONS];
+static int order_matrix[N_FLOORS][N_BUTTONS];
 static int direction = 0; // -1 is going down, 0 is stopped at a floor without orders and 1 is going up
 static int last_floor = -1; // this value stores the last floor the elevator passed or stopped at
 
@@ -40,13 +40,13 @@ void queue_clear(void){
 }
 
 // Places an order in the given floor and button type
-void queue_give_order(int floor, elev_button_type_t button){
+void queue_give_order(int floor, int button){
 	order_matrix[floor][button] = 1;
 	elev_set_button_lamp(button, floor, 1);
 }
 
 // Clears an order from the given floor and button type
-void queue_clear_order(int floor, elev_button_type_t button){
+void queue_clear_order(int floor, int button){
 	order_matrix[floor][button] = 0;
 	elev_set_button_lamp(button, floor, 0);
 }
@@ -133,7 +133,7 @@ void queue_start_motor(){
 		return;
 	}
 
-	if ((current_floor == -1) ){ // If the elevator is between floors
+	if (current_floor == -1){ // If the elevator is between floors
 		for(int floor = 0; floor < N_FLOORS; floor++){
 			for(int button = 0; button < N_BUTTONS; button++){
 
@@ -205,7 +205,7 @@ int queue_is_last_stop(){
 	for(int floor = current_floor + direction; floor < N_FLOORS; floor = floor + direction){
 		for(int button = 0; button < N_BUTTONS; button++){
 			if (order_matrix[floor][button] == 1){
-				is_last_stop == 0;
+				is_last_stop = 0;
 			}
 		}
 	}
