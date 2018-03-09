@@ -212,9 +212,3 @@ int queue_is_last_stop(){
 
 	return is_last_stop;
 }
-
-void queue_update_floor(){
-
-	elev_set_floor_indicator(last_floor);
-
-}
