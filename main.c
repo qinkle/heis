@@ -14,15 +14,16 @@ int main() {
         return 1;
     }
 	
+
 	//Go to defined state without heeding buttons
     elev_set_motor_direction(DIRN_UP);
 	while (elev_get_floor_sensor_signal() == -1){}
 	elev_set_motor_direction(DIRN_STOP);
 	fsm_floor_sensor();
-	
+
 	
 	//Initialize state machine and queue
-	//fsm_init();
+	
 	queue_init();
     
     while (1) {
