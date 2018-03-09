@@ -1,4 +1,5 @@
 #include "FSM.h"
+#include "queue.c"
 #include "elev.h"
 #include "timer.h"
 #include <stdlib.h>
@@ -18,8 +19,8 @@
 			fourth		0	0		0
 */
 static const int order_matrix[N_FLOORS][N_BUTTONS];
-static const int direction = 0; // -1 is going down, 0 is stopped at a floor without orders and 1 is going up
-static const int last_floor = -1;
+static int direction = 0; // -1 is going down, 0 is stopped at a floor without orders and 1 is going up
+static int last_floor = -1; // this value stores the last floor the elevator passed or stopped at
 
 // Initialization makes sure there are only zeroes in the queue matrix
 // initially, as the allocated memory blocks could contain values other than zero
@@ -68,7 +69,7 @@ int queue_is_empty(void) {
 
 	for(int floor = 0; floor < N_FLOORS; floor++){
 		for(int button = 0; button < N_BUTTONS; button++) {
-			if(order_matrix[floor][buttor] == 1){
+			if(order_matrix[floor][button] == 1){
 				return 0;
 			}
 		}
